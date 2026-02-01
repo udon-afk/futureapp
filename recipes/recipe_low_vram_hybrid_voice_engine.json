@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "recipe_id": "recipe_low_vram_hybrid_voice_engine",
+  "title": "Low-VRAM Hybrid Voice Engine",
+  "description": "VRAM 8GB以下でも動作する、CPU(耳)とGPU(喉)を分担させた音声会話システム",
+  "author": "Ria & Udon",
+  "compatibility": {
+    "os": [
+      "linux"
+    ],
+    "wsl": true,
+    "min_vram_gb": 4
+  },
+  "dependencies": {
+    "apt": [
+      "ffmpeg",
+      "sox"
+    ],
+    "pip": [
+      "qwen-tts",
+      "faster-whisper",
+      "py-cord[voice]"
+    ],
+    "openclaw_plugins": []
+  },
+  "steps": [
+    {
+      "order": 1,
+      "type": "command",
+      "content": "sudo apt update && sudo apt install -y ffmpeg sox",
+      "explanation": "音声処理の必須ライブラリを導入"
+    },
+    {
+      "order": 2,
+      "type": "command",
+      "content": "pip install qwen-tts faster-whisper py-cord[voice]",
+      "explanation": "AIモデル実行用のライブラリを導入"
+    },
+    {
+      "order": 3,
+      "type": "command",
+      "content": "python voice_bridge.py --device-tts cuda --device-stt cpu",
+      "explanation": "ハイブリッド構成（喉:GPU / 耳:CPU）で起動"
+    }
+  ],
+  "verification": "!speak コマンドでVCからリアの声が聞こえること"
+}

@@ -1,0 +1,34 @@
+{
+  "version": "1.0",
+  "recipe_id": "recipe_openclaw_security_hardening",
+  "title": "OpenClaw Security Hardening",
+  "description": "Gatewayのアクセス制限とログの機密情報マスクを実施する基本セット",
+  "author": "Ria & Udon",
+  "compatibility": {
+    "os": [
+      "linux"
+    ],
+    "wsl": true,
+    "min_vram_gb": 4
+  },
+  "dependencies": {
+    "apt": [],
+    "pip": [],
+    "openclaw_plugins": []
+  },
+  "steps": [
+    {
+      "order": 1,
+      "type": "command",
+      "content": "chmod 700 ~/.openclaw",
+      "explanation": "設定ファイルを所有者以外から保護"
+    },
+    {
+      "order": 2,
+      "type": "config_patch",
+      "content": "{\"logging\": {\"redactSensitive\": \"tools\"}}",
+      "explanation": "ログの機密情報を自動で隠す"
+    }
+  ],
+  "verification": "ls -ld ~/.openclaw の結果が drwx------ であること"
+}

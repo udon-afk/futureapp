@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "recipe_id": "recipe_private_todo_dashboard",
+  "title": "Private TODO Dashboard",
+  "description": "FastAPIを使用したパスワード認証付きの自律秘書管理ダッシュボード",
+  "author": "Ria & Udon",
+  "compatibility": {
+    "os": ["linux"],
+    "wsl": true,
+    "min_vram_gb": 4
+  },
+  "dependencies": {
+    "apt": ["python3-venv"],
+    "pip": ["fastapi", "uvicorn", "psutil"],
+    "openclaw_plugins": []
+  },
+  "steps": [
+    {
+      "order": 1,
+      "type": "command",
+      "content": "mkdir -p todo_app/static todo_app/data",
+      "explanation": "ディレクトリ構造の作成"
+    },
+    {
+      "order": 2,
+      "type": "command",
+      "content": "python3 -m venv venv && ./venv/bin/pip install fastapi uvicorn psutil",
+      "explanation": "環境構築"
+    },
+    {
+      "order": 3,
+      "type": "write_file",
+      "content": "main.py / index.html",
+      "explanation": "ソースコードの展開"
+    }
+  ],
+  "verification": "http://localhost:<PORT> にアクセスして設定したパスワードでログインできること"
+}

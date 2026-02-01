@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "recipe_id": "string (unique id)",
+  "title": "string (human readable title)",
+  "description": "string (what this solves)",
+  "author": "string (github user or alias)",
+  "compatibility": {
+    "os": ["linux", "windows", "darwin"],
+    "wsl": true,
+    "min_vram_gb": 0,
+    "required_privileges": "none | user | root"
+  },
+  "dependencies": {
+    "apt": ["list of packages"],
+    "pip": ["list of python packages"],
+    "openclaw_plugins": ["list of plugins"]
+  },
+  "steps": [
+    {
+      "order": 1,
+      "type": "command | config_patch | write_file",
+      "content": "string (the actual action)",
+      "explanation": "string (why we do this)"
+    }
+  ],
+  "verification": "string (how to check if it worked)",
+  "tags": ["list", "of", "search", "keywords"]
+}
